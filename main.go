@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 	// "net"
+  "strconv"
 )
 
 var (
@@ -43,4 +44,23 @@ func main() {
 	fmt.Println("Ports:", ports)
 	fmt.Println("Output:", *outputFlag)
 
+  // Iterate over hosts and ports
+	for _, host := range hosts {
+		for _, portStr := range ports {
+			port, err := strconv.Atoi(portStr)
+			if err != nil {
+				fmt.Printf("Invalid port number: %s\n", portStr)
+				continue
+			}
+
+			// Call PortScan for each host and port combination
+			isOpen := PortScan("tcp", host, port)
+			if isOpen {
+				fmt.Printf("Port %d is open on host %s\n", port, host)
+			} else {
+				fmt.Printf("Port %d is closed on host %s\n", port, host)
+			}
+		}
+	}
+  
 }
