@@ -1,4 +1,3 @@
-module GoScope
+module github.com/ProjectKeystone/GoScope
 
 go 1.18
-

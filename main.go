@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"strings"
 	// "net"
-  "strconv"
+	"github.com/ProjectKeystone/GoScope/portscan"
+	"strconv"
 )
 
 var (
@@ -44,7 +45,7 @@ func main() {
 	fmt.Println("Ports:", ports)
 	fmt.Println("Output:", *outputFlag)
 
-  // Iterate over hosts and ports
+	// Iterate over hosts and ports
 	for _, host := range hosts {
 		for _, portStr := range ports {
 			port, err := strconv.Atoi(portStr)
@@ -54,7 +55,7 @@ func main() {
 			}
 
 			// Call PortScan for each host and port combination
-			isOpen := PortScan("tcp", host, port)
+			isOpen := portscan.PortScan("tcp", host, port)
 			if isOpen {
 				fmt.Printf("Port %d is open on host %s\n", port, host)
 			} else {
@@ -62,5 +63,5 @@ func main() {
 			}
 		}
 	}
-  
+
 }
